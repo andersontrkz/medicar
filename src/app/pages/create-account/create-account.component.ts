@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -9,11 +8,11 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class CreateAccountComponent implements OnInit {
 
-  constructor(private formBuilder:FormBuilder){}
+  constructor(){}
 
   ngOnInit(): void {
   }
- 
+
   saveForm(){
     console.log(this.password)
   }

@@ -1,9 +1,8 @@
-export interface Appointment {
-  id: number,
-  dia: string,
-  horario: string,
-  data_agendamento: string,
-  medico: Doctor
+export interface Schedule {
+    id: number,
+    medico: Doctor,
+    dia: string,
+    horarios: string[]
 }
 
 export interface Doctor {
