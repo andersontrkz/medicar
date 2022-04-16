@@ -1,0 +1,50 @@
+<div class="form-container">
+  <section class="main-section">
+    <div class="main-header">
+      <img id="main-logo-image" src="../../../assets/Logo.png" alt="Medicar Logo">
+      <div class="main-header__login-info">
+        <h4>Lucas Freitas</h4>
+        <h4>Desconectar</h4>
+      </div>
+    </div>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef>ESPECIALIDADE</th>
+        <td *matCellDef="let element"> {{element.position}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>PROFISSIONAL</th>
+        <td *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="weight">
+        <th mat-header-cell *matHeaderCellDef>DATA</th>
+        <td *matCellDef="let element"> {{element.weight}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="symbol">
+        <th mat-header-cell *matHeaderCellDef>HORA</th>
+        <td *matCellDef="let element"> {{element.symbol}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef ></th>
+        <td *matCellDef="let element" >
+          <button mat-button class="table-button">
+            <mat-icon style="font-size: 16px; padding-top: 8px;">close</mat-icon>
+            <span>Desmarcar</span>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </section>
+</div>
