@@ -28,10 +28,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background: var(--main-color);
   border-radius: 8px;
   color: var(--quaternary-color);
+  box-shadow: unset !important;
 }
 .mat-main:hover {
   background: var(--secondary-color);
-  transition: .9s;
+  transition: .6s;
 }
 
 .mat-secondary {
@@ -41,17 +42,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 .mat-secondary:hover {
   background: var(--quaternary-color);
-  transition: .9s;
+  transition: .6s;
+  box-shadow: unset !important;
 }
 
 .mat-tertiary {
   background: var(--quaternary-color);
   border-radius: 8px;
   color: var(--main-color);
+  box-shadow: unset !important;
 }
 .mat-tertiary:hover {
   background: var(--tertiary-color);
-  transition: .9s;
+  transition: .6s;
 }
 
 

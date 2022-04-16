@@ -5,8 +5,8 @@
     <mat-form-field appearance="outline" class="full-width-field">
       <mat-label>Especialidade</mat-label>
       <mat-select>
-        <mat-option *ngFor="let appointment of appointments" [value]="appointment.especialidade">
-          {{appointment.especialidade}}
+        <mat-option *ngFor="let appointment of appointments" [value]="appointment.medico.especialidade">
+          {{appointment.medico.especialidade}}
         </mat-option>
       </mat-select>
     </mat-form-field> 
@@ -14,8 +14,8 @@
     <mat-form-field appearance="outline" class="full-width-field">
       <mat-label>Médico</mat-label>
       <mat-select>
-        <mat-option *ngFor="let appointment of appointments" [value]="appointment.medico">
-          {{appointment.medico}}
+        <mat-option *ngFor="let appointment of appointments" [value]="appointment.medico.nome">
+          {{appointment.medico.nome}}
         </mat-option>
       </mat-select>
     </mat-form-field> 
@@ -23,8 +23,8 @@
     <mat-form-field appearance="outline" class="full-width-field">
       <mat-label>Data</mat-label>
       <mat-select>
-        <mat-option *ngFor="let appointment of appointments" [value]="appointment.data">
-          {{appointment.data}}
+        <mat-option *ngFor="let appointment of appointments" [value]="appointment.dia">
+          {{appointment.dia}}
         </mat-option>
       </mat-select>
     </mat-form-field> 
@@ -32,8 +32,8 @@
     <mat-form-field appearance="outline" class="full-width-field">
       <mat-label>Hora</mat-label>
       <mat-select>
-        <mat-option *ngFor="let appointment of appointments" [value]="appointment.hora">
-          {{appointment.hora}}
+        <mat-option *ngFor="let appointment of appointments" [value]="appointment.horario">
+          {{appointment.horario}}
         </mat-option>
       </mat-select>
     </mat-form-field>

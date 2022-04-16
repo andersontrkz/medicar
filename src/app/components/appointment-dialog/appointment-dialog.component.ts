@@ -1,12 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Appointment } from 'src/app/models/appointment';
+import { AppointmentService } from 'src/app/services/appointment.service';
 
-interface Appointment {
-  especialidade: string;
-  medico: string;
-  data: string;
-  hora: string;
-}
 
 @Component({
   selector: 'app-appointment-dialog',
@@ -14,17 +10,25 @@ interface Appointment {
   styleUrls: ['./appointment-dialog.component.css']
 })
 export class AppointmentDialogComponent implements OnInit {
-  appointments: Appointment[] = [
-    {especialidade: 'Pediatria', medico: 'Dr. André', data: '01/01/2020', hora: '13:00'},
-  ];
+  appointment = {} as Appointment;
+  appointments = [] as Appointment[];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Appointment,
-    private matDialog: MatDialog
+    private appointmentService: AppointmentService
     ) {
   }
 
   ngOnInit(): void {
+    this.getAppointments();
+  }
+
+  getAppointments() {
+    this.appointmentService.getAppointments().subscribe((appointments: Appointment[]) => {
+      this.appointments = appointments;
+      console.log('appointments');
+      console.log(appointments);
+    });
   }
 
   logAge(): void {

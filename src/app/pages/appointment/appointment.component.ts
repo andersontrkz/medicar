@@ -1,36 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
-export interface PeriodicElement {
-  position: string;
-  name: string;
-  weight: string;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 'Cardiologista', name: 'Dr. Carlos Caio Ferreira', weight: '01/01/2020', symbol: '13:00'},
-  {position: 'Cardiologista', name: 'Dr. Carlos Caio Ferreira', weight: '01/01/2020', symbol: '13:00'},
-  {position: 'Cardiologista', name: 'Dr. Carlos Caio Ferreira', weight: '01/01/2020', symbol: '13:00'},
-  {position: 'Cardiologista', name: 'Dr. Carlos Caio Ferreira', weight: '01/01/2020', symbol: '13:00'},
-  {position: 'Cardiologista', name: 'Dr. Carlos Caio Ferreira', weight: '01/01/2020', symbol: '13:00'},
-  {position: 'Cardiologista', name: 'Dr. Carlos Caio Ferreira', weight: '01/01/2020', symbol: '13:00'},
-  {position: 'Cardiologista', name: 'Dr. Carlos Caio Ferreira', weight: '01/01/2020', symbol: '13:00'},
-  {position: 'Cardiologista', name: 'Dr. Carlos Caio Ferreira', weight: '01/01/2020', symbol: '13:00'},
-  {position: 'Cardiologista', name: 'Dr. Carlos Caio Ferreira', weight: '01/01/2020', symbol: '13:00'},
-  {position: 'Cardiologista', name: 'Dr. Carlos Caio Ferreira', weight: '01/01/2020', symbol: '13:00'},
-  {position: 'Cardiologista', name: 'Dr. Carlos Caio Ferreira', weight: '01/01/2020', symbol: '13:00'},
-  {position: 'Cardiologista', name: 'Dr. Carlos Caio Ferreira', weight: '01/01/2020', symbol: '13:00'},
-  {position: 'Cardiologista', name: 'Dr. Carlos Caio Ferreira', weight: '01/01/2020', symbol: '13:00'},
-  {position: 'Cardiologista', name: 'Dr. Carlos Caio Ferreira', weight: '01/01/2020', symbol: '13:00'},
-  {position: 'Cardiologista', name: 'Dr. Carlos Caio Ferreira', weight: '01/01/2020', symbol: '13:00'},
-  {position: 'Cardiologista', name: 'Dr. Carlos Caio Ferreira', weight: '01/01/2020', symbol: '13:00'},
-  {position: 'Cardiologista', name: 'Dr. Carlos Caio Ferreira', weight: '01/01/2020', symbol: '13:00'},
-  {position: 'Cardiologista', name: 'Dr. Carlos Caio Ferreira', weight: '01/01/2020', symbol: '13:00'},
-  {position: 'Cardiologista', name: 'Dr. Carlos Caio Ferreira', weight: '01/01/2020', symbol: '13:00'},
-  {position: 'Cardiologista', name: 'Dr. Carlos Caio Ferreira', weight: '01/01/2020', symbol: '13:00'},
-  {position: 'Cardiologista', name: 'Dr. Carlos Caio Ferreira', weight: '01/01/2020', symbol: '13:00'},
-  {position: 'Cardiologista', name: 'Dr. Carlos Caio Ferreira', weight: '01/01/2020', symbol: '13:00'},
-];
+import { MatDialog } from '@angular/material/dialog';
+import { AppointmentDialogComponent } from 'src/app/components/appointment-dialog/appointment-dialog.component';
+import { Appointment } from 'src/app/models/appointment';
+import { AppointmentService } from 'src/app/services/appointment.service';
 
 @Component({
   selector: 'app-appointment',
@@ -38,12 +10,32 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./appointment.component.css']
 })
 export class AppointmentComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'actions'];
-  dataSource = ELEMENT_DATA;
+  appointment = {} as Appointment;
+  appointments = [] as Appointment[];
 
-  constructor() { }
+  displayedColumns: string[] = ['especialidade', 'medico', 'dia', 'horario', 'actions'];
 
-  ngOnInit(): void {
+  constructor(private readonly dialog: MatDialog, private appointmentService: AppointmentService) {
   }
 
+  ngOnInit(): void {
+    this.getAppointments();
+  }
+
+  getAppointments() {
+    this.appointmentService.getAppointments().subscribe((appointments: Appointment[]) => {
+      this.appointments = appointments;
+    });
+  }
+
+  openPersonalDetailsDialog(): void {
+    this.dialog.open(AppointmentDialogComponent, {
+    width: '100%',
+    maxWidth: '400px',
+    height: 'auto',
+    hasBackdrop: true,
+    maxHeight: '700px',
+    data: { close }
+  });  
+  }
 }
