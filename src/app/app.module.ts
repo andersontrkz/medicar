@@ -25,6 +25,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     LoginComponent,
     CreateAccountComponent,
     AppointmentComponent,
-    AppointmentDialogComponent
+    AppointmentDialogComponent,
+    AlertComponent
   ],
   imports: [
     AppRoutingModule,

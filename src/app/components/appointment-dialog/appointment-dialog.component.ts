@@ -1,9 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Schedule } from 'src/app/models/schedule';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { SchedulingService } from 'src/app/services/scheduling.service';
+import { AlertComponent } from '../alert/alert.component';
 
 @Component({
   selector: 'app-appointment-dialog',
@@ -23,7 +25,10 @@ export class AppointmentDialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Schedule,
     private schedulingService: SchedulingService,
-    private appointmentService: AppointmentService
+    private appointmentService: AppointmentService,
+    private router: Router,
+    private dialogRef: MatDialogRef<AppointmentDialogComponent>,
+    private readonly dialog: MatDialog
     ) {
   }
 
@@ -40,9 +45,18 @@ export class AppointmentDialogComponent implements OnInit {
   submitAppointments() {
     const { id } = this.allSchedules[0];
     const hour = this.hour.value;
+
     this.appointmentService.postAppointment(id, hour).subscribe((schedules: any) => {
       console.log(schedules);
     });
+
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/appointment']);
+    });
+
+    this.openAlertComponent();
+
+    this.dialogRef.close();
   }
 
   filterBySpecialty(): void {
@@ -76,5 +90,14 @@ export class AppointmentDialogComponent implements OnInit {
         return schedule.dia === this.date.value;
       });
     };
+  }
+
+  openAlertComponent(): void {
+    this.dialog.open(AlertComponent, {
+      data: {
+        title: 'Sucesso!',
+        text: 'Consulta adicionada com sucesso.'
+      }
+    });  
   }
 }

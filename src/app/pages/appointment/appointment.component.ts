@@ -28,14 +28,13 @@ export class AppointmentComponent implements OnInit {
     });
   }
 
-  openPersonalDetailsDialog(): void {
+  openAppointmentDialogComponent(): void {
     this.dialog.open(AppointmentDialogComponent, {
-    width: '100%',
-    maxWidth: '400px',
-    height: 'auto',
-    hasBackdrop: true,
-    maxHeight: '700px',
-    data: { close }
-  });  
+      width: '100%',
+      maxWidth: '400px',
+      height: 'auto',
+      hasBackdrop: true,
+      maxHeight: '700px',
+    });  
   }
 }

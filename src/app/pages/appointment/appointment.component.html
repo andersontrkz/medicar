@@ -13,7 +13,7 @@
       <div class="main-header">
         <h1 class="main-text-color">Consulta Clínica</h1>
   
-        <button mat-button color="main" (click)="openPersonalDetailsDialog()" style="margin-top: -20px;">
+        <button mat-button color="main" (click)="openAppointmentDialogComponent()" style="margin-top: -20px;">
           <mat-icon style="font-size: 16px; padding-top: 8px;">add</mat-icon>
           <span>Nova Consulta</span>
         </button>
@@ -43,7 +43,7 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef ></th>
           <td *matCellDef="let element" >
-            <button mat-button class="table-button" (click)="openPersonalDetailsDialog()">
+            <button mat-button class="table-button">
               <mat-icon style="font-size: 16px; padding-top: 8px;">close</mat-icon>
               <span>Desmarcar</span>
             </button>
