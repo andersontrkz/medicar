@@ -3,7 +3,6 @@ import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AlertComponent } from 'src/app/components/alert/alert.component';
-import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -22,18 +21,13 @@ export class CreateAccountComponent implements OnInit {
 
   constructor(
     private readonly dialog: MatDialog,
-    private authenticationService: AuthenticationService,
     private router: Router,
     private userService: UserService,
   ){}
 
-  ngOnInit(): void {
-    if (this.authenticationService.getAuthenticationStatus()) {
-      this.router.navigate(['/appointment']);
-    }
-  }
+  ngOnInit(): void {}
 
-  submitCreateAccount(): void {
+  submitUser(): void {
     let success = false;
     const account = this.userService.postUser(this.name.value, this.email.value, this.confirmPassword.value);
 
@@ -51,13 +45,19 @@ export class CreateAccountComponent implements OnInit {
     }, 1000);
   }
 
-  openAlert(title: string, text: string) {
-    this.dialog.open(AlertComponent, {
-      data: { title, text },
-    });
+  onEnterKey($event: { preventDefault: () => void }) {
+    if (this.validateForm()) {
+      this.submitUser();
+    }
   }
 
   validateForm(): boolean {
     return this.name.valid && this.email.valid && this.password.valid && (this.password.value === this.confirmPassword.value);
+  }
+
+  openAlert(title: string, text: string) {
+    this.dialog.open(AlertComponent, {
+      data: { title, text },
+    });
   }
 }

@@ -1,5 +1,5 @@
 <div class="container-centered">
-  <form class="form-container">
+  <form class="form-container" (keydown.enter)="onEnterKey($event)">
       <img id="main-logo-image" src="../../../assets/Logo.png" alt="Medicar Logo">
       
       <h2 class="main-text-color">Crie sua conta</h2>
@@ -37,7 +37,7 @@
 
       <mat-grid-list cols="2" rowHeight="2:1" gutterSize="24px">
         <mat-grid-tile><button routerLink="/login" mat-raised-button color="tertiary" class="full-width-field">Cancelar</button></mat-grid-tile>
-        <mat-grid-tile><button [disabled]="!validateForm()" (click)="submitCreateAccount()" mat-raised-button color="main" class="full-width-field" tabindex="5">Confirmar</button></mat-grid-tile>
+        <mat-grid-tile><button [disabled]="!validateForm()" (click)="submitUser()" mat-raised-button color="main" class="full-width-field" tabindex="5">Confirmar</button></mat-grid-tile>
       </mat-grid-list>
     </form>
   </div>

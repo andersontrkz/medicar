@@ -44,13 +44,19 @@ export class LoginComponent implements OnInit {
     }, 1000);
   }
 
-  openAlert(title: string, text: string): void {
-    this.dialog.open(AlertComponent, {
-      data: { title, text },
-    });
+  onEnterKey($event: { preventDefault: () => void }) {
+    if (this.validateForm()) {
+      this.submitLogin();
+    }
   }
 
   validateForm(): boolean {
     return this.login.valid && this.password.valid;
+  }
+
+  openAlert(title: string, text: string): void {
+    this.dialog.open(AlertComponent, {
+      data: { title, text },
+    });
   }
 }
