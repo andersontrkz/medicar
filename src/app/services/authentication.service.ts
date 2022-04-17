@@ -99,6 +99,10 @@ export class AuthenticationService {
     return this.storageValue.username;
   }
 
+  getToken() {
+    return this.storageValue.token;
+  }
+
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

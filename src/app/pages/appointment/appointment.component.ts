@@ -26,7 +26,7 @@ export class AppointmentComponent implements OnInit {
   ) {
     this.username = authenticationService.getUsername();
 
-    this.appointmentService.getAppointments().subscribe((appointments: Appointment[]) => {
+    this.appointmentService.getAllAppointments().subscribe((appointments: Appointment[]) => {
       this.appointments = appointments;
     });
   }
