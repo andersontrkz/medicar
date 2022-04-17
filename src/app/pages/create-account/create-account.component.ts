@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { AlertComponent } from 'src/app/components/alert/alert.component';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-create-account',
@@ -8,13 +12,13 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class CreateAccountComponent implements OnInit {
 
-  constructor(){}
+  constructor(
+    private readonly dialog: MatDialog,
+    private authenticationService: AuthenticationService,
+    private router: Router,
+  ){}
 
   ngOnInit(): void {
-  }
-
-  saveForm(){
-    console.log(this.password)
   }
 
   name = new FormControl('', [Validators.required]);
@@ -25,4 +29,41 @@ export class CreateAccountComponent implements OnInit {
 
   hidePassword = true;
   hideConfirmPasswordassword = true;
+
+  submitCreateAccount() {
+    let success = false;
+
+    const account = this.authenticationService.postAccount(this.name.value, this.email.value, this.confirmPassword.value);
+    console.log(account)
+    account.subscribe(({ username }) => {
+      success = username
+        this.dialog.open(AlertComponent, {
+          data: {
+            title: 'Sucesso!',
+            text: 'Conta cridada com sucesso.'
+          }
+        });
+
+
+      this.router.navigate(['/']);
+    })
+    setTimeout(() => {
+      if (!success){
+        this.dialog.open(AlertComponent, {
+          data: {
+            title: 'Erro!',
+            text: 'Dados de acesso inválidos.'
+          }
+        });  
+      }
+    }, 1000)
+  }
+
+  validateForm() {
+    let disable;
+    
+    disable = this.name.valid && this.email.valid && this.password.valid && (this.password.value === this.confirmPassword.value);
+
+    return disable;
+  }
 }

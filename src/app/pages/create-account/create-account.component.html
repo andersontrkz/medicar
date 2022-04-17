@@ -5,21 +5,21 @@
       <h2 class="main-text-color">Crie sua conta</h2>
 
       <div>
-        <mat-form-field appearance="outline" class="full-width-field">
+        <mat-form-field appearance="outline" class="full-width-field" tabindex="0">
           <mat-label>Nome</mat-label>
           <input matInput type="text" [formControl]="name" required>
         </mat-form-field>
       </div>
 
       <div>
-        <mat-form-field appearance="outline" class="full-width-field">
+        <mat-form-field appearance="outline" class="full-width-field" tabindex="1">
           <mat-label>Email</mat-label>
           <input matInput type="text" [formControl]="email" required>
         </mat-form-field>
       </div>
 
       <div>
-        <mat-form-field appearance="outline" class="full-width-field">
+        <mat-form-field appearance="outline" class="full-width-field" tabindex="2">
           <mat-label>Senha</mat-label>
           <input matInput [type]="hidePassword ? 'password' : 'text'" [formControl]="password" required>
           <mat-icon matSuffix (click)="hidePassword = !hidePassword" class="secondary-text">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
@@ -27,7 +27,7 @@
       </div>
 
       <div>
-        <mat-form-field appearance="outline" class="full-width-field">
+        <mat-form-field appearance="outline" class="full-width-field" tabindex="4">
           <mat-label>Confirmar Senha</mat-label>
           <input matInput [type]="hideConfirmPasswordassword ? 'password' : 'text'" [formControl]="confirmPassword" required>
           <mat-icon matSuffix (click)="hideConfirmPasswordassword = !hideConfirmPasswordassword" class="secondary-text">{{hideConfirmPasswordassword ? 'visibility' : 'visibility_off'}}</mat-icon>
@@ -35,13 +35,9 @@
         </mat-form-field>
       </div>
 
-      <div>
-        <mat-checkbox class="secondary-text">Lembrar minha senha</mat-checkbox>
-      </div>
-
       <mat-grid-list cols="2" rowHeight="2:1" gutterSize="24px">
         <mat-grid-tile><button routerLink="/login" mat-raised-button color="tertiary" class="full-width-field">Cancelar</button></mat-grid-tile>
-        <mat-grid-tile><button (click)="saveForm()" mat-raised-button color="main" class="full-width-field">Voltar</button></mat-grid-tile>
+        <mat-grid-tile><button [disabled]="!validateForm()" (click)="submitCreateAccount()" mat-raised-button color="main" class="full-width-field" tabindex="5">Confirmar</button></mat-grid-tile>
       </mat-grid-list>
     </form>
   </div>

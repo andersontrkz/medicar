@@ -28,10 +28,10 @@ export class LoginComponent implements OnInit {
   }
 
   submitLogin(){
-    let tokens = '';
+    let success = false;
     const login = this.authenticationService.login(this.login.value, this.password.value, this.rememberMe.value);
     login.subscribe(({ token }) => {
-      tokens = token
+      success = token
         this.dialog.open(AlertComponent, {
           data: {
             title: 'Sucesso!',
@@ -39,19 +39,26 @@ export class LoginComponent implements OnInit {
           }
         });
 
-      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['/appointment']);
-      });
+
+      this.router.navigate(['/appointment']);
     })
     setTimeout(() => {
-      if (tokens === ''){
-      this.dialog.open(AlertComponent, {
-        data: {
-          title: 'Erro!',
-          text: 'Dados de acesso inválidos.'
-        }
-      });  
+      if (!success){
+        this.dialog.open(AlertComponent, {
+          data: {
+            title: 'Erro!',
+            text: 'Dados de acesso inválidos.'
+          }
+        });  
       }
     }, 1000)
+  }
+
+  validateForm() {
+    let disable;
+    
+    disable = this.login.valid && this.password.valid;
+
+    return disable;
   }
 }

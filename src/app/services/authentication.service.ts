@@ -9,7 +9,8 @@ import { catchError, retry, tap } from 'rxjs/operators';
 })
 export class AuthenticationService {
   base_url = 'http://localhost:3000';
-  path = '/users/login';
+  loginPath = '/users/login';
+  accountPath = '/users';
 
   storageKey = 'currentUser';
   storageValue = {
@@ -53,7 +54,15 @@ export class AuthenticationService {
   }
 
   postLogin(username: string, password: string): Observable<any> {
-    return this.httpClient.post<any>(`${this.base_url}${this.path}`, JSON.stringify({ username, password }), this.httpOptions)
+    return this.httpClient.post<any>(`${this.base_url}${this.loginPath}`, JSON.stringify({ username, password }), this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
+  postAccount(username: string, email: string, password: string): Observable<any> {
+    return this.httpClient.post<any>(`${this.base_url}${this.accountPath}`, JSON.stringify({ username, password, email }), this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -84,6 +93,10 @@ export class AuthenticationService {
       return true;
     }
     return false;
+  }
+
+  getUsername() {
+    return this.storageValue.username;
   }
 
   handleError(error: HttpErrorResponse) {

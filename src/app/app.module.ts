@@ -26,6 +26,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AlertComponent } from './components/alert/alert.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AlertComponent } from './components/alert/alert.component';
     CreateAccountComponent,
     AppointmentComponent,
     AppointmentDialogComponent,
-    AlertComponent
+    AlertComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     AppRoutingModule,

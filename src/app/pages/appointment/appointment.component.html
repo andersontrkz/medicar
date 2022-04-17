@@ -4,7 +4,7 @@
       <img id="main-logo-image" src="../../../assets/Logo.png" alt="Medicar Logo">
 
       <div class="main-header__login-info">
-        <h4 class="main-header__login-info__user">Lucas Freitas</h4>
+        <h4 class="main-header__login-info__user">{{ username }}</h4>
         <h4 class="main-header__login-info__disconnect" (click)="logout()">Desconectar</h4>
       </div>
     </div>
@@ -43,7 +43,7 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef ></th>
           <td *matCellDef="let element" >
-            <button mat-button class="table-button">
+            <button mat-button class="table-button" (click)="deleteAppointment(element)">
               <mat-icon style="font-size: 16px; padding-top: 8px;">close</mat-icon>
               <span>Desmarcar</span>
             </button>

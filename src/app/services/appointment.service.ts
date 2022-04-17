@@ -34,6 +34,14 @@ export class AppointmentService {
       )
   }
 
+  deleteAppointment(consulta_id: number): Observable<any> {
+    return this.httpClient.delete<any>(`${this.base_url}${this.path}/${consulta_id}`, this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
