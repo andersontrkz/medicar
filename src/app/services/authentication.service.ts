@@ -2,29 +2,36 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry, tap } from 'rxjs/operators';
+import { catchError, retry } from 'rxjs/operators';
+
+export interface Storage {
+  username: string,
+  token: string,
+  rememberMe: boolean,
+  isLogged: boolean,
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  base_url = 'http://localhost:3000';
-  loginPath = '/users/login';
-  accountPath = '/users';
+  base_url: string = 'http://localhost:3000';
+  path: string = '/users/login';
 
-  storageKey = 'currentUser';
-  storageValue = {
+  storageKey: string = 'currentUser';
+
+  storageValue: Storage = {
     username: '',
     token: '',
     rememberMe: false,
     isLogged: false,
   }
 
-  constructor(
-    public router: Router,
-    private httpClient: HttpClient
-  )
-  {
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  }
+
+  constructor(public router: Router, private httpClient: HttpClient) {
     const storageValue = localStorage.getItem(this.storageKey) || sessionStorage.getItem(this.storageKey);
 
     if (storageValue) {
@@ -49,20 +56,8 @@ export class AuthenticationService {
     return loginRequest;
   }
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  }
-
   postLogin(username: string, password: string): Observable<any> {
-    return this.httpClient.post<any>(`${this.base_url}${this.loginPath}`, JSON.stringify({ username, password }), this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
-  }
-
-  postAccount(username: string, email: string, password: string): Observable<any> {
-    return this.httpClient.post<any>(`${this.base_url}${this.accountPath}`, JSON.stringify({ username, password, email }), this.httpOptions)
+    return this.httpClient.post<any>(`${this.base_url}${this.path}`, JSON.stringify({ username, password }), this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
