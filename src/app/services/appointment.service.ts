@@ -11,7 +11,7 @@ import { Appointment } from '../models/appointment';
 export class AppointmentService {
   base_url = 'http://localhost:3000';
   path = '/consultas';
-  Authorization = "9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b"
+  Authorization = "9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b";
 
   constructor(private httpClient: HttpClient) { }
 

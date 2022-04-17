@@ -8,7 +8,7 @@ import { Schedule } from '../models/schedule';
   providedIn: 'root'
 })
 export class SchedulingService {
-  url = 'http://localhost:3000';
+  base_url = 'http://localhost:3000';
   path = '/agendas';
   Authorization = "9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b"
 
@@ -19,7 +19,7 @@ export class SchedulingService {
   }
 
   getSchedulings(): Observable<Schedule[]> {
-    return this.httpClient.get<Schedule[]>(`${this.url}${this.path}`, this.httpOptions)
+    return this.httpClient.get<Schedule[]>(`${this.base_url}${this.path}`, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError))
