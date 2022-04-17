@@ -61,8 +61,8 @@ export class AppointmentComponent implements OnInit {
     this.authenticationService.logout();
     this.dialog.open(AlertComponent, {
       data: {
-        title: 'Sucesso!',
-        text: 'Usuário desconectado com sucesso.'
+        title: 'Sucesso',
+        text: 'Usuário desconectado com sucesso!'
       }
     });  
   }

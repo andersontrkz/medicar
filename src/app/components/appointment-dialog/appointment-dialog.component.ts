@@ -87,8 +87,8 @@ export class AppointmentDialogComponent implements OnInit {
   openSuccessAlert(): void {
     this.dialog.open(AlertComponent, {
       data: {
-        title: 'Sucesso!',
-        text: 'Consulta adicionada com sucesso.'
+        title: 'Sucesso',
+        text: 'Consulta adicionada com sucesso!'
       }
     });  
   }

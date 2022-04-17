@@ -34,8 +34,8 @@ export class LoginComponent implements OnInit {
       success = token
         this.dialog.open(AlertComponent, {
           data: {
-            title: 'Sucesso!',
-            text: 'Login efetuado com sucesso.'
+            title: 'Sucesso',
+            text: 'Login efetuado com sucesso!'
           }
         });
 

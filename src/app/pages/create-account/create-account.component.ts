@@ -39,8 +39,8 @@ export class CreateAccountComponent implements OnInit {
       success = username
         this.dialog.open(AlertComponent, {
           data: {
-            title: 'Sucesso!',
-            text: 'Conta cridada com sucesso.'
+            title: 'Sucesso',
+            text: 'Conta cridada com sucesso!'
           }
         });
 

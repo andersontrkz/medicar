@@ -9,8 +9,8 @@ import { AlertComponent } from '../alert/alert.component';
   styleUrls: ['./confirmation-dialog.component.css']
 })
 export class ConfirmationDialogComponent implements OnInit {
-  title = '';
-  text = '';
+  title: string = '';
+  text: string = '';
 
   constructor(
     private readonly dialog: MatDialog,
@@ -21,19 +21,18 @@ export class ConfirmationDialogComponent implements OnInit {
       this.text = data.text;
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-
-  confirm() {
+  confirm(): void {
     const { id } = this.data.appointment;
+
     this.appointmentService.deleteAppointment(id);
     this.dialogRef.close();
 
     this.dialog.open(AlertComponent, {
       data: {
-        title: 'Sucesso!',
-        text: 'Consulta desmarcada com sucesso.'
+        title: 'Sucesso',
+        text: 'Consulta desmarcada com sucesso!'
       }
     });  
   }
