@@ -14,13 +14,12 @@ import { AlertComponent } from '../alert/alert.component';
 })
 export class AppointmentDialogComponent implements OnInit {
   schedules = [] as Schedule[];
+  schedulesAccumulator = [] as Schedule[];
 
-  specialty = new FormControl('', [Validators.required]);
-  doctor = new FormControl('', [Validators.required]);
-  date = new FormControl('', [Validators.required]);
-  hour = new FormControl('', [Validators.required]);
-  
-  allSchedules = [] as Schedule[];
+  specialty: FormControl = new FormControl('', [Validators.required]);
+  doctor: FormControl = new FormControl('', [Validators.required]);
+  date: FormControl = new FormControl('', [Validators.required]);
+  hour: FormControl = new FormControl('', [Validators.required]);
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: Schedule,
@@ -29,32 +28,25 @@ export class AppointmentDialogComponent implements OnInit {
     private router: Router,
     private dialogRef: MatDialogRef<AppointmentDialogComponent>,
     private readonly dialog: MatDialog
-    ) {
-  }
-
-  ngOnInit(): void {
-    this.getSchedule();
-  } 
-
-  getSchedule(): void {
+  ) {
     this.schedulingService.getSchedulings().subscribe((schedules: Schedule[]) => {
       this.schedules = schedules;
     });
   }
 
-  submitAppointments() {
-    const { id } = this.allSchedules[0];
+  ngOnInit(): void {} 
+
+  submitAppointments(): void {
+    const { id } = this.schedulesAccumulator[0];
     const hour = this.hour.value;
 
-    this.appointmentService.postAppointment(id, hour).subscribe((schedules: any) => {
-      console.log(schedules);
-    });
+    this.appointmentService.postAppointment(id, hour).subscribe();
 
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate(['/appointment']);
     });
 
-    this.openAlertComponent();
+    this.openSuccessAlert();
 
     this.dialogRef.close();
   }
@@ -65,7 +57,7 @@ export class AppointmentDialogComponent implements OnInit {
     this.hour.setValue(null);
 
     if (this.specialty.value) {
-      this.allSchedules = this.schedules.filter((schedule: Schedule) => {
+      this.schedulesAccumulator = this.schedules.filter((schedule: Schedule) => {
         return schedule.medico.especialidade.nome === this.specialty.value;
       });
     };
@@ -76,7 +68,7 @@ export class AppointmentDialogComponent implements OnInit {
     this.hour.setValue(null);
 
     if (this.doctor.value) {
-      this.allSchedules = this.allSchedules.filter((schedule: Schedule) => {
+      this.schedulesAccumulator = this.schedulesAccumulator.filter((schedule: Schedule) => {
         return schedule.medico.nome === this.doctor.value;
       });
     };
@@ -86,13 +78,13 @@ export class AppointmentDialogComponent implements OnInit {
     this.hour.setValue(null);
 
     if (this.date.value) {
-      this.allSchedules = this.allSchedules.filter((schedule: Schedule) => {
+      this.schedulesAccumulator = this.schedulesAccumulator.filter((schedule: Schedule) => {
         return schedule.dia === this.date.value;
       });
     };
   }
 
-  openAlertComponent(): void {
+  openSuccessAlert(): void {
     this.dialog.open(AlertComponent, {
       data: {
         title: 'Sucesso!',
