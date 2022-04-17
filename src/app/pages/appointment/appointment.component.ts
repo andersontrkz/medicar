@@ -70,5 +70,4 @@ export class AppointmentComponent implements OnInit {
   dateFormat(date: string) {
     return Utils.dateFormat(date);
   }
-
 }
