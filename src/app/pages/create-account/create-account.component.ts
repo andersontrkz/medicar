@@ -11,15 +11,6 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   styleUrls: ['./create-account.component.css']
 })
 export class CreateAccountComponent implements OnInit {
-
-  constructor(
-    private readonly dialog: MatDialog,
-    private authenticationService: AuthenticationService,
-    private router: Router,
-  ){}
-
-  ngOnInit(): void {}
-
   name = new FormControl('', [Validators.required]);
   email = new FormControl('', [Validators.required]);
   password = new FormControl('', [Validators.required]);
@@ -27,6 +18,18 @@ export class CreateAccountComponent implements OnInit {
 
   hidePassword = true;
   hideConfirmPasswordassword = true;
+
+  constructor(
+    private readonly dialog: MatDialog,
+    private authenticationService: AuthenticationService,
+    private router: Router,
+  ){}
+
+  ngOnInit(): void {
+    if (this.authenticationService.getAuthenticationStatus()) {
+      this.router.navigate(['/appointment']);
+    }
+  }
 
   submitCreateAccount(): void {
     let success = false;
@@ -41,7 +44,7 @@ export class CreateAccountComponent implements OnInit {
 
     setTimeout(() => {
       if (!success){
-        this.openAlert('Erro!', 'Dados de acesso inválidos.');
+        this.openAlert('Erro', 'Dados de acesso inválidos!');
       }
     }, 1000);
   }

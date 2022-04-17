@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -25,40 +24,36 @@ export class LoginComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
+    if (this.authenticationService.getAuthenticationStatus()) {
+      this.router.navigate(['/appointment']);
+    }
   }
 
-  submitLogin(){
+  submitLogin(): void {
     let success = false;
     const login = this.authenticationService.login(this.login.value, this.password.value, this.rememberMe.value);
+
     login.subscribe(({ token }) => {
-      success = token
-        this.dialog.open(AlertComponent, {
-          data: {
-            title: 'Sucesso',
-            text: 'Login efetuado com sucesso!'
-          }
-        });
+      success = token;
 
-
+      this.openAlert('Sucesso', 'Login efetuado com sucesso!');
       this.router.navigate(['/appointment']);
-    })
+    });
+
     setTimeout(() => {
       if (!success){
-        this.dialog.open(AlertComponent, {
-          data: {
-            title: 'Erro!',
-            text: 'Dados de acesso inválidos.'
-          }
-        });  
+        this.openAlert('Erro', 'Dados de acesso inválidos!');
       }
-    }, 1000)
+    }, 1000);
   }
 
-  validateForm() {
-    let disable;
-    
-    disable = this.login.valid && this.password.valid;
+  openAlert(title: string, text: string): void {
+    this.dialog.open(AlertComponent, {
+      data: { title, text },
+    });
+  }
 
-    return disable;
+  validateForm(): boolean {
+    return this.login.valid && this.password.valid;
   }
 }
