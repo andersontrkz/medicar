@@ -23,17 +23,14 @@ export class LoginComponent implements OnInit {
     private router: Router,
   ){}
 
-  ngOnInit(): void {
-    if (this.authenticationService.getAuthenticationStatus()) {
-      this.router.navigate(['/appointment']);
-    }
-  }
+  ngOnInit(): void {}
 
   submitLogin(): void {
     let success = false;
     const login = this.authenticationService.login(this.login.value, this.password.value, this.rememberMe.value);
 
-    login.subscribe(({ token }) => {
+    login.subscribe((response: any) => {
+      const { token } = response;
       success = token;
 
       this.openAlert('Sucesso', 'Login efetuado com sucesso!');

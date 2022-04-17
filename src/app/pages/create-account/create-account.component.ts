@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AlertComponent } from 'src/app/components/alert/alert.component';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-create-account',
@@ -23,6 +24,7 @@ export class CreateAccountComponent implements OnInit {
     private readonly dialog: MatDialog,
     private authenticationService: AuthenticationService,
     private router: Router,
+    private userService: UserService,
   ){}
 
   ngOnInit(): void {
@@ -33,7 +35,7 @@ export class CreateAccountComponent implements OnInit {
 
   submitCreateAccount(): void {
     let success = false;
-    const account = this.authenticationService.postAccount(this.name.value, this.email.value, this.confirmPassword.value);
+    const account = this.userService.postUser(this.name.value, this.email.value, this.confirmPassword.value);
 
     account.subscribe(({ username }) => {
       success = username;
