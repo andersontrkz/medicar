@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AppointmentDialogComponent } from 'src/app/components/appointment-dialog/appointment-dialog.component';
 import { Appointment } from 'src/app/models/appointment';
 import { AppointmentService } from 'src/app/services/appointment.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-appointment',
@@ -15,7 +16,11 @@ export class AppointmentComponent implements OnInit {
 
   displayedColumns: string[] = ['especialidade', 'medico', 'dia', 'horario', 'actions'];
 
-  constructor(private readonly dialog: MatDialog, private appointmentService: AppointmentService) {
+  constructor(
+    private readonly dialog: MatDialog,
+    private appointmentService: AppointmentService,
+    private authenticationService: AuthenticationService
+    ) {
   }
 
   ngOnInit(): void {
@@ -36,5 +41,9 @@ export class AppointmentComponent implements OnInit {
       hasBackdrop: true,
       maxHeight: '700px',
     });  
+  }
+
+  logout() {
+    this.authenticationService.logout();
   }
 }

@@ -18,12 +18,12 @@
       </div>
 
       <div>
-        <mat-checkbox class="secondary-text">Lembrar minha senha</mat-checkbox>
+        <mat-checkbox class="secondary-text" [formControl]="rememberMe">Lembrar minha senha</mat-checkbox>
       </div>
 
       <mat-grid-list cols="2" rowHeight="2:1" gutterSize="24px">
         <mat-grid-tile><button routerLink="/create-account" mat-raised-button color="tertiary" class="full-width-field">Criar Conta</button></mat-grid-tile>
-        <mat-grid-tile><button (click)="saveForm()" mat-raised-button color="main" class="full-width-field">Acessar</button></mat-grid-tile>
+        <mat-grid-tile><button (click)="submitLogin()" mat-raised-button color="main" class="full-width-field">Acessar</button></mat-grid-tile>
       </mat-grid-list>
     </form>
   </div>
