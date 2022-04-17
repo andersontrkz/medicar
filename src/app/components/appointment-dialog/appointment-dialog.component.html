@@ -24,7 +24,7 @@
       <mat-label>Data</mat-label>
       <mat-select [formControl]="date" [disabled]="!doctor.value">
         <mat-option *ngFor="let schedule of schedulesAccumulator" [value]="schedule.dia" (click)="filterByDay()" required>
-          {{schedule.dia}}
+          {{dateFormat(schedule.dia)}}
         </mat-option>
       </mat-select>
     </mat-form-field> 

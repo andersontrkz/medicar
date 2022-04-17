@@ -3,13 +3,15 @@
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
+
+import { environment } from '../../environments/environment';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MedicarService {
-  base_url: string = 'http://localhost:3000';
+  base_url: string = environment.apiBaseUrl;
   authorization: string = '';
 
   httpOptions = {

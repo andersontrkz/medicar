@@ -3,9 +3,12 @@ import { FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Schedule } from 'src/app/models/schedule';
+
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { SchedulingService } from 'src/app/services/scheduling.service';
 import { AlertComponent } from '../alert/alert.component';
+
+import Utils from '../../utils/utils';
 
 @Component({
   selector: 'app-appointment-dialog',
@@ -34,7 +37,7 @@ export class AppointmentDialogComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {} 
+  ngOnInit(): void {}
 
   submitAppointments(): void {
     const { id } = this.schedulesAccumulator[0];
@@ -91,4 +94,9 @@ export class AppointmentDialogComponent implements OnInit {
       }
     });  
   }
+
+  dateFormat(date: string) {
+    return Utils.dateFormat(date);
+  }
+
 }

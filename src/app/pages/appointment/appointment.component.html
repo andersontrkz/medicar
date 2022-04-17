@@ -32,7 +32,7 @@
 
         <ng-container matColumnDef="dia">
           <th mat-header-cell *matHeaderCellDef>DATA</th>
-          <td *matCellDef="let element">{{element.dia}}</td>
+          <td *matCellDef="let element">{{dateFormat(element.dia)}}</td>
         </ng-container>
 
         <ng-container matColumnDef="horario">

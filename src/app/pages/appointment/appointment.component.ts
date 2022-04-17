@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+
 import { AlertComponent } from 'src/app/components/alert/alert.component';
 import { AppointmentDialogComponent } from 'src/app/components/appointment-dialog/appointment-dialog.component';
 import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component';
+
 import { Appointment } from 'src/app/models/appointment';
 import { AppointmentService } from 'src/app/services/appointment.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+
+import Utils from '../../utils/utils';
 
 @Component({
   selector: 'app-appointment',
@@ -62,4 +66,9 @@ export class AppointmentComponent implements OnInit {
       }
     });  
   }
+
+  dateFormat(date: string) {
+    return Utils.dateFormat(date);
+  }
+
 }

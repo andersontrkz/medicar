@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 export interface Storage {
   username: string,
@@ -15,7 +16,7 @@ export interface Storage {
   providedIn: 'root'
 })
 export class AuthenticationService {
-  base_url: string = 'http://localhost:3000';
+  base_url: string = environment.apiBaseUrl;
   path: string = '/users/login';
 
   storageKey: string = 'currentUser';
