@@ -13,7 +13,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
   styleUrls: ['./appointment.component.css']
 })
 export class AppointmentComponent implements OnInit {
-  username = '';
+  username: string = '';
   appointment = {} as Appointment;
   appointments = [] as Appointment[];
 
@@ -23,19 +23,15 @@ export class AppointmentComponent implements OnInit {
     private readonly dialog: MatDialog,
     private appointmentService: AppointmentService,
     private authenticationService: AuthenticationService
-    ) {
-      this.username = authenticationService.getUsername();
-  }
+  ) {
+    this.username = authenticationService.getUsername();
 
-  ngOnInit(): void {
-    this.getAppointments();
-  }
-
-  getAppointments() {
     this.appointmentService.getAppointments().subscribe((appointments: Appointment[]) => {
       this.appointments = appointments;
     });
   }
+
+  ngOnInit(): void {}
 
   deleteAppointment(appointment: Appointment) {
     this.dialog.open(ConfirmationDialogComponent, {
@@ -47,7 +43,7 @@ export class AppointmentComponent implements OnInit {
     });
   }
 
-  openAppointmentDialogComponent(): void {
+  openAppointmentDialog(): void {
     this.dialog.open(AppointmentDialogComponent, {
       width: '100%',
       maxWidth: '400px',
@@ -57,7 +53,7 @@ export class AppointmentComponent implements OnInit {
     });  
   }
 
-  logout() {
+  logout(): void {
     this.authenticationService.logout();
     this.dialog.open(AlertComponent, {
       data: {
