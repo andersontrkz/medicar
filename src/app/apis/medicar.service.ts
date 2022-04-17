@@ -1,3 +1,5 @@
+// * BASED ON * https://stackoverflow.com/questions/68522223/typeerror-ctx-product-is-undefined
+
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
@@ -22,7 +24,7 @@ export class MedicarService {
   }
 
   handleError(error: HttpErrorResponse) {
-    let errorMessage = '';
+    let errorMessage: string = '';
     if (error.error instanceof ErrorEvent) {
       // Erro ocorreu no lado do client
       errorMessage = error.error.message;

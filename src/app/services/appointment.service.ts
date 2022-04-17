@@ -11,7 +11,7 @@ import { AuthenticationService } from './authentication.service';
   providedIn: 'root'
 })
 export class AppointmentService extends MedicarService {
-  path = '/consultas';
+  path: string = '/consultas';
 
   constructor(
     private httpClient: HttpClient,

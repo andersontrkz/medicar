@@ -39,6 +39,29 @@ export class AuthenticationService {
     }
   }
 
+  getUsername() {
+    return this.storageValue.username;
+  }
+
+  getToken() {
+    return this.storageValue.token;
+  }
+
+  getAuthenticationStatus(): boolean {
+    if (this.storageValue.isLogged && this.storageValue.token) {
+      return true;
+    }
+    return false;
+  }
+
+  postLogin(username: string, password: string): Observable<any> {
+    return this.httpClient.post<any>(`${this.base_url}${this.path}`, JSON.stringify({ username, password }), this.httpOptions)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      )
+  }
+
   login(username: string, password: string, rememberMe: boolean) {
     const loginRequest = this.postLogin(username, password);
 
@@ -54,14 +77,6 @@ export class AuthenticationService {
     });
 
     return loginRequest;
-  }
-
-  postLogin(username: string, password: string): Observable<any> {
-    return this.httpClient.post<any>(`${this.base_url}${this.path}`, JSON.stringify({ username, password }), this.httpOptions)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      )
   }
 
   setStorageCredentials(isRememberMe: boolean) {
@@ -83,23 +98,8 @@ export class AuthenticationService {
     this.router.navigate(['/'], { replaceUrl: true });
   }
 
-  getAuthenticationStatus(): boolean {
-    if (this.storageValue.isLogged && this.storageValue.token) {
-      return true;
-    }
-    return false;
-  }
-
-  getUsername() {
-    return this.storageValue.username;
-  }
-
-  getToken() {
-    return this.storageValue.token;
-  }
-
   handleError(error: HttpErrorResponse) {
-    let errorMessage = '';
+    let errorMessage: string = '';
     if (error.error instanceof ErrorEvent) {
       // Erro ocorreu no lado do client
       errorMessage = error.error.message;
