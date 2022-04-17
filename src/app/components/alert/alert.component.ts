@@ -7,17 +7,20 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./alert.component.css']
 })
 export class AlertComponent implements OnInit {
-  modalMessage = { title: '', text: '' };
-  THREE_SECONDS_IN_MILESECONDS = 3000;
+  title: string = ''
+  text: string = '';
+
+  THREE_SECONDS_IN_MILESECONDS = 2000;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<AlertComponent>) {
+    private dialogRef: MatDialogRef<AlertComponent>
+  ) {
+      this.title = this.data.title;
+      this.text = this.data.text;
   }
 
   ngOnInit(): void {
-    this.modalMessage = this.data;
-
     setTimeout(() => {
       this.dialogRef.close()
     }, this.THREE_SECONDS_IN_MILESECONDS);
