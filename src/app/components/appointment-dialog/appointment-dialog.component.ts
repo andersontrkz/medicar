@@ -47,7 +47,6 @@ export class AppointmentDialogComponent implements OnInit {
     });
 
     this.openSuccessAlert();
-
     this.dialogRef.close();
   }
 
