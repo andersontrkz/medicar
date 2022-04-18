@@ -1,6 +1,7 @@
 ### Welcome to the Medicar project repository!
 
 # Medicar
+![Medicar Logo](https://github.com/andersontrkz/medicar/blob/main/src/assets/Logo.png)
 
 
 ## About
