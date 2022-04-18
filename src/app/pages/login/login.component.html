@@ -1,0 +1,31 @@
+<div class="container-centered">
+  <form class="form-container" (keydown.enter)="onEnterKey($event)">
+      <img id="main-logo-image" src="../../../assets/Logo.png" alt="Medicar Logo">
+      
+      <div>
+        <mat-form-field appearance="outline" class="full-width-field" tabindex="0">
+          <mat-label>Email ou Login</mat-label>
+          <input matInput type="text" [formControl]="login" required>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field appearance="outline" class="full-width-field" tabindex="1">
+          <mat-label>Senha</mat-label>
+          <input matInput [type]="hidePassword ? 'password' : 'text'" [formControl]="password" required>
+          <mat-icon matSuffix (click)="hidePassword = !hidePassword" class="secondary-text">{{hidePassword ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-checkbox class="secondary-text" [formControl]="rememberMe" tabindex="2">Lembrar minha senha</mat-checkbox>
+      </div>
+
+      <mat-grid-list cols="2" rowHeight="2:1" gutterSize="24px">
+        <mat-grid-tile><button routerLink="/create-account" mat-raised-button color="tertiary" class="full-width-field">Criar Conta</button></mat-grid-tile>
+        <mat-grid-tile><button [disabled]="!validateForm()" (click)="submitLogin()" mat-raised-button color="main" class="full-width-field" tabindex="3">Acessar</button></mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </div>
+
+        

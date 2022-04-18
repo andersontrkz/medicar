@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>{{title}}</h1>
+<div mat-dialog-content>
+  <p>{{text}}</p>
+</div>
+<div mat-dialog-actions class="confirmation-dialog__acions">
+  <button mat-button mat-dialog-close color="tertiary">Cancelar</button>
+  <button mat-button cdkFocusInitial (click)="confirm()" color="main">Confirmar</button>
+</div>

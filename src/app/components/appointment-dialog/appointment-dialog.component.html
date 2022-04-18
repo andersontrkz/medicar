@@ -1,0 +1,46 @@
+<div class="form-container">
+  <section class="main-section">
+    <h2 class="main-text-color">Nova Consulta</h2>
+
+    <mat-form-field appearance="outline" class="full-width-field">
+      <mat-label>Especialidade</mat-label>
+      <mat-select [formControl]="specialty">
+        <mat-option *ngFor="let schedule of schedules" [value]="schedule.medico.especialidade.nome" (click)="filterBySpecialty()" required>
+          {{schedule.medico.especialidade.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field> 
+
+    <mat-form-field appearance="outline" class="full-width-field">
+      <mat-label>Médico</mat-label>
+      <mat-select [formControl]="doctor" [disabled]="!specialty.value">
+        <mat-option *ngFor="let schedule of schedulesAccumulator" [value]="schedule.medico.nome" (click)="filterByDoctor()" required>
+          {{schedule.medico.nome}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field> 
+
+    <mat-form-field appearance="outline" class="full-width-field">
+      <mat-label>Data</mat-label>
+      <mat-select [formControl]="date" [disabled]="!doctor.value">
+        <mat-option *ngFor="let schedule of schedulesAccumulator" [value]="schedule.dia" (click)="filterByDay()" required>
+          {{dateFormat(schedule.dia)}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field> 
+
+    <mat-form-field appearance="outline" class="full-width-field">
+      <mat-label>Hora</mat-label>
+      <mat-select [formControl]="hour" [disabled]="!date.value">
+        <mat-option *ngFor="let horario of schedulesAccumulator[0]?.horarios" [value]="horario" required>
+          {{horario}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-grid-list cols="2" rowHeight="2:1" gutterSize="24px">
+      <mat-grid-tile><button mat-dialog-close mat-raised-button color="tertiary" class="full-width-field">Cancelar</button></mat-grid-tile>
+      <mat-grid-tile><button (click)="submitAppointments()" mat-raised-button color="main" class="full-width-field" [disabled]="!hour.value">Confirmar</button></mat-grid-tile>
+    </mat-grid-list>
+  </section>
+</div>

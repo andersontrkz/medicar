@@ -1,0 +1,58 @@
+<div class="form-container">
+  <section class="main-section">
+    <div class="main-header">
+      <img id="main-logo-image" src="../../../assets/Logo.png" alt="Medicar Logo">
+
+      <div class="main-header__login-info">
+        <h4 class="main-header__login-info__user">{{ username }}</h4>
+        <h4 class="main-header__login-info__disconnect" (click)="logout()">Desconectar</h4>
+      </div>
+    </div>
+    
+    <section class="table-section">
+      <div class="main-header">
+        <h1 class="main-text-color">Consulta Clínica</h1>
+  
+        <button mat-button color="main" (click)="openAppointmentDialog()" style="margin-top: -20px;">
+          <mat-icon style="font-size: 16px; padding-top: 8px;">add</mat-icon>
+          <span>Nova Consulta</span>
+        </button>
+      </div>
+
+      <table mat-table [dataSource]="appointments">
+        <ng-container matColumnDef="especialidade">
+          <th mat-header-cell *matHeaderCellDef>ESPECIALIDADE</th>
+          <td *matCellDef="let element">{{element.medico.especialidade.nome}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="medico">
+          <th mat-header-cell *matHeaderCellDef>PROFISSIONAL</th>
+          <td *matCellDef="let element">{{element.medico.nome}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="dia">
+          <th mat-header-cell *matHeaderCellDef>DATA</th>
+          <td *matCellDef="let element">{{dateFormat(element.dia)}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="horario">
+          <th mat-header-cell *matHeaderCellDef>HORA</th>
+          <td *matCellDef="let element">{{element.horario}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef ></th>
+          <td *matCellDef="let element" >
+            <button mat-button class="table-button" (click)="deleteAppointment(element)">
+              <mat-icon style="font-size: 16px; padding-top: 8px;">close</mat-icon>
+              <span>Desmarcar</span>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </section>
+  </section>
+</div>
