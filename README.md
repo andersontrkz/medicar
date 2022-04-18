@@ -1,6 +1,6 @@
 ### Welcome to the Medicar project repository!
 
-# Medicar
+![Medicar Logo](https://github.com/andersontrkz/medicar/blob/main/src/assets/Logo.png)
 
 
 ## About
@@ -121,6 +121,10 @@ Contributions are always welcome! If you have any ideas, suggestions, fixes, fee
 4. Test your changes;
 5. Push your branch and open a Pull Request.
 
+
+## Screenshots
+![Medicar Login](https://github.com/andersontrkz/medicar/blob/main/src/assets/Login.png)
+![Medicar Appointment](https://github.com/andersontrkz/medicar/blob/main/src/assets/Appointment.png)
 
 ## License
 
